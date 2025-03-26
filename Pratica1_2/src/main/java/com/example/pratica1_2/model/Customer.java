@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Entity
+@Table(name = "customers")
 @Data
 public class Customer {
     @Id
@@ -19,4 +20,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orderHistory;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
 }

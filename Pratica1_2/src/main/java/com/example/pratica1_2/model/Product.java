@@ -3,8 +3,10 @@ package com.example.pratica1_2.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
+@Table(name = "products")
 @Data
 public class Product {
     @Id
@@ -17,4 +19,8 @@ public class Product {
     private String category;
     private boolean available;
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") // Quem cadastrou o produto
+    private User user;
 }
