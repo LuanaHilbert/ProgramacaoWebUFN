@@ -1,7 +1,8 @@
-package com.example.pratica1_2.model;
+package com.example.pratica2.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
