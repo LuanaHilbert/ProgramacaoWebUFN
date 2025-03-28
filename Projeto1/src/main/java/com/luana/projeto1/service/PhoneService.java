@@ -27,34 +27,6 @@ public class PhoneService {
         return phoneRepository.findById(id);
     }
 
-    public Phone save(Phone phone) {
-        if (phone.getUser() == null || phone.getUser().getId() == null) {
-            throw new IllegalArgumentException("Usuário inválido!");
-        }
-
-        Optional<User> userOptional = userRepository.findById(phone.getUser().getId());
-        if (userOptional.isEmpty()) {
-            throw new IllegalArgumentException("Usuário não encontrado!");
-        }
-
-        User user = userOptional.get();
-        if (user.getPhones().size() >= 3) {
-            throw new IllegalArgumentException("O usuário já possui o número máximo de 3 telefones!");
-        }
-
-        String number = phone.getNumber();
-        if (number.length() < 2 || !number.matches("\\d{2}.*")) {
-            throw new IllegalArgumentException("Número de telefone inválido!");
-        }
-
-        int ddd = Integer.parseInt(number.substring(0, 2));
-        if (ddd < 11 || ddd > 99) {
-            throw new IllegalArgumentException("DDD inválido! Deve estar entre 11 e 99.");
-        }
-
-        return phoneRepository.save(phone);
-    }
-
     public void deleteById(Long id) {
         phoneRepository.deleteById(id);
     }
@@ -62,4 +34,43 @@ public class PhoneService {
     public boolean existsById(Long id) {
         return phoneRepository.existsById(id);
     }
+
+    public Phone save(Long userId, Phone phone) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado!"));
+        phone.setUser(user);
+        return save(phone);
+    }
+
+    public Phone save(Phone phone) {
+        validatePhone(phone);
+        validateUserPhoneLimit(phone.getUser());
+        return phoneRepository.save(phone);
+    }
+
+    private void validatePhone(Phone phone) {
+        validatePhoneNumber(phone.getNumber());
+        if (phone.getUser() == null) {
+            throw new IllegalArgumentException("Telefone não associado a um usuário!");
+        }
+    }
+
+    private void validateUserPhoneLimit(User user) {
+        long count = phoneRepository.countByUser(user);
+        if (count >= 3) {
+            throw new IllegalArgumentException("Usuário já possui 3 telefones!");
+        }
+    }
+
+    public void validatePhoneNumber(String number) {
+        if (number == null || !number.matches("^\\d{10,11}$")) {
+            throw new IllegalArgumentException("Número inválido! Use DDD + número (10 ou 11 dígitos).");
+        }
+
+        int ddd = Integer.parseInt(number.substring(0, 2));
+        if (ddd < 11 || ddd > 99) {
+            throw new IllegalArgumentException("DDD inválido!");
+        }
+    }
+
 }

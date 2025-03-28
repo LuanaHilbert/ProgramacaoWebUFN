@@ -1,5 +1,8 @@
 package com.luana.projeto1.controller;
 
+import com.luana.projeto1.dto.CreatePhoneDTO;
+import com.luana.projeto1.dto.PhoneDTO;
+import com.luana.projeto1.mapper.PhoneMapper;
 import com.luana.projeto1.model.Phone;
 import com.luana.projeto1.service.PhoneService;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +21,25 @@ public class PhoneController {
     }
 
     @GetMapping
-    public List<Phone> getAllPhones() {
-        return phoneService.findAll();
+    public List<PhoneDTO> getAllPhones() {
+        return phoneService.findAll().stream()
+                .map(PhoneMapper::toDTO) // Uso do mapper
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Phone> getPhoneById(@PathVariable Long id) {
+    public ResponseEntity<PhoneDTO> getPhoneById(@PathVariable Long id) {
         Optional<Phone> phone = phoneService.findById(id);
-        return phone.map(ResponseEntity::ok)
+        return phone.map(p -> ResponseEntity.ok(PhoneMapper.toDTO(p))) // Mapper aqui
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createPhone(@RequestBody Phone phone) {
+    public ResponseEntity<?> createPhone(@RequestBody CreatePhoneDTO createPhoneDTO) {
         try {
-            Phone savedPhone = phoneService.save(phone);
-            return ResponseEntity.ok(savedPhone);
+            Phone phone = PhoneMapper.toEntity(createPhoneDTO); // Conversão via mapper
+            Phone savedPhone = phoneService.save(createPhoneDTO.userId(), phone);
+            return ResponseEntity.ok(PhoneMapper.toDTO(savedPhone));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

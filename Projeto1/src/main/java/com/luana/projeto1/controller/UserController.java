@@ -1,9 +1,11 @@
 package com.luana.projeto1.controller;
 
+import com.luana.projeto1.dto.CreateUserDTO;
+import com.luana.projeto1.dto.UserRecord;
 import com.luana.projeto1.exception.ResourceNotFoundException;
+import com.luana.projeto1.mapper.UserMapper;
 import com.luana.projeto1.model.User;
 import com.luana.projeto1.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,6 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -34,13 +35,17 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User newUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    public ResponseEntity<?> createUser(@RequestBody CreateUserDTO createUserDTO) {
+        try {
+            User newUser = userService.createUser(createUserDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDTO(newUser));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserRecord userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
         return ResponseEntity.ok(updatedUser);
     }
