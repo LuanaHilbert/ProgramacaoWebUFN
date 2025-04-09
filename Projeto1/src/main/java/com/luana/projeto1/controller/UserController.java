@@ -1,7 +1,8 @@
 package com.luana.projeto1.controller;
 
 import com.luana.projeto1.dto.CreateUserDTO;
-import com.luana.projeto1.dto.UserRecord;
+import com.luana.projeto1.dto.UpdateUserDTO;
+import com.luana.projeto1.dto.UserDTO;
 import com.luana.projeto1.exception.ResourceNotFoundException;
 import com.luana.projeto1.mapper.UserMapper;
 import com.luana.projeto1.model.User;
@@ -44,10 +45,19 @@ public class UserController {
         }
     }
 
+//    @PutMapping("/{id}")
+//    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserRecord userDetails) {
+//        User updatedUser = userService.updateUser(id, userDetails);
+//        return ResponseEntity.ok(updatedUser);
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserRecord userDetails) {
-        User updatedUser = userService.updateUser(id, userDetails);
-        return ResponseEntity.ok(updatedUser);
+    public ResponseEntity<UserDTO> updateUser(
+            @PathVariable Long id,
+            @RequestBody UpdateUserDTO updateDTO
+    ) {
+        User updatedUser = userService.updateUser(id, updateDTO);
+        return ResponseEntity.ok(UserMapper.toDTO(updatedUser));
     }
 
     @DeleteMapping("/{id}")

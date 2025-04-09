@@ -1,9 +1,12 @@
 package com.luana.projeto1.service;
 
+import com.luana.projeto1.dto.UpdatePhoneDTO;
+import com.luana.projeto1.mapper.PhoneMapper;
 import com.luana.projeto1.model.Phone;
 import com.luana.projeto1.model.User;
 import com.luana.projeto1.repository.PhoneRepository;
 import com.luana.projeto1.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,4 +76,28 @@ public class PhoneService {
         }
     }
 
+    @Transactional
+    public Phone updatePhone(Long id, UpdatePhoneDTO updateDTO) {
+        Phone phone = phoneRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Telefone não encontrado!"));
+
+        // Validação do número (se fornecido)
+        if (updateDTO.number() != null) {
+            validatePhoneNumber(updateDTO.number());
+        }
+
+        // Validação de userId (se fornecido)
+        if (updateDTO.userId() != null) {
+            User newUser = userRepository.findById(updateDTO.userId())
+                    .orElseThrow(() -> new IllegalArgumentException("Novo usuário não encontrado!"));
+
+            if (phoneRepository.countByUser(newUser) >= 3) {
+                throw new IllegalArgumentException("Novo usuário já possui 3 telefones!");
+            }
+            phone.setUser(newUser);
+        }
+
+        PhoneMapper.updateFromDTO(updateDTO, phone);
+        return phoneRepository.save(phone);
+    }
 }

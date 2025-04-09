@@ -2,6 +2,7 @@ package com.luana.projeto1.controller;
 
 import com.luana.projeto1.dto.CreatePhoneDTO;
 import com.luana.projeto1.dto.PhoneDTO;
+import com.luana.projeto1.dto.UpdatePhoneDTO;
 import com.luana.projeto1.mapper.PhoneMapper;
 import com.luana.projeto1.model.Phone;
 import com.luana.projeto1.service.PhoneService;
@@ -52,5 +53,14 @@ public class PhoneController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PhoneDTO> updatePhone(
+            @PathVariable Long id,
+            @RequestBody UpdatePhoneDTO updateDTO
+    ) {
+        Phone updatedPhone = phoneService.updatePhone(id, updateDTO);
+        return ResponseEntity.ok(PhoneMapper.toDTO(updatedPhone));
     }
 }

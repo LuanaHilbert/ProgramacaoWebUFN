@@ -1,8 +1,9 @@
 package com.luana.projeto1.service;
 
 import com.luana.projeto1.dto.CreateUserDTO;
-import com.luana.projeto1.dto.UserRecord;
+import com.luana.projeto1.dto.UpdateUserDTO;
 import com.luana.projeto1.exception.ResourceNotFoundException;
+import com.luana.projeto1.mapper.UserMapper;
 import com.luana.projeto1.model.Phone;
 import com.luana.projeto1.model.User;
 import com.luana.projeto1.repository.UserRepository;
@@ -76,21 +77,19 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateUser(Long id, CreateUserDTO userDetails) {
+    @Transactional
+    public User updateUser(Long id, UpdateUserDTO updateDTO) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado!"));
 
-        if (userDetails.email() != null && !userDetails.email().equals(user.getEmail())) {
-            if (userRepository.existsByEmail(userDetails.email())) {
+        // Validação de email único (se fornecido)
+        if (updateDTO.email() != null && !updateDTO.email().equals(user.getEmail())) {
+            if (userRepository.existsByEmail(updateDTO.email())) {
                 throw new IllegalArgumentException("E-mail já está em uso!");
             }
-            user.setEmail(userDetails.email());
         }
 
-        if (userDetails.name() != null) {
-            user.setName(userDetails.name());
-        }
-
+        UserMapper.updateFromDTO(updateDTO, user);
         return userRepository.save(user);
     }
 

@@ -2,6 +2,7 @@ package com.luana.projeto1.mapper;
 
 import com.luana.projeto1.dto.CreatePhoneDTO;
 import com.luana.projeto1.dto.PhoneDTO;
+import com.luana.projeto1.dto.UpdatePhoneDTO;
 import com.luana.projeto1.model.Phone;
 
 public class PhoneMapper {
@@ -20,5 +21,11 @@ public class PhoneMapper {
                 phone.getNumber(),
                 phone.getUser() != null ? phone.getUser().getId() : null
         );
+    }
+
+    public static void updateFromDTO(UpdatePhoneDTO dto, Phone phone) {
+        if (dto.number() != null) {
+            phone.setNumber(dto.number());
+        }
     }
 }

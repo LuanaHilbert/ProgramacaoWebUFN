@@ -1,6 +1,7 @@
 package com.luana.projeto1.mapper;
 
 import com.luana.projeto1.dto.PhoneDTO;
+import com.luana.projeto1.dto.UpdateUserDTO;
 import com.luana.projeto1.dto.UserDTO;
 import com.luana.projeto1.model.User;
 
@@ -22,5 +23,13 @@ public class UserMapper {
                 user.getEmail(),
                 phones
         );
+    }
+    public static void updateFromDTO(UpdateUserDTO dto, User user) {
+        if (dto.name() != null) {
+            user.setName(dto.name());
+        }
+        if (dto.email() != null) {
+            user.setEmail(dto.email());
+        }
     }
 }
