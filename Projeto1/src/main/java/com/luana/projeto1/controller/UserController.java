@@ -36,13 +36,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody CreateUserDTO createUserDTO) {
-        try {
-            User newUser = userService.createUser(createUserDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDTO(newUser));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<List<UserDTO>> createUsers(@RequestBody List<CreateUserDTO> usersDTO) {
+        List<UserDTO> savedUsers = userService.createUsers(usersDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUsers);
     }
 
 //    @PutMapping("/{id}")

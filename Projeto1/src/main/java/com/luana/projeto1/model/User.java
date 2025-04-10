@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,13 +21,13 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Phone> phones;
+    private List<Phone> phones = new ArrayList<>();
 
     @Builder
     public User(String name, String email, List<Phone> phones) {
         this.name = name;
         this.email = email;
-        this.phones = phones;
+        this.phones = phones != null ? phones : new ArrayList<>(); // Garante inicialização
     }
 
     public User() {

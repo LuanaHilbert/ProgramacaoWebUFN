@@ -2,6 +2,7 @@ package com.luana.projeto1.service;
 
 import com.luana.projeto1.dto.CreateUserDTO;
 import com.luana.projeto1.dto.UpdateUserDTO;
+import com.luana.projeto1.dto.UserDTO;
 import com.luana.projeto1.exception.ResourceNotFoundException;
 import com.luana.projeto1.mapper.UserMapper;
 import com.luana.projeto1.model.Phone;
@@ -55,14 +56,13 @@ public class UserService {
         // Adiciona telefones (se houver)
         if (userDTO.phones() != null) {
             for (String number : userDTO.phones()) {
-                // Validação do número via PhoneService
-                phoneService.validatePhoneNumber(number);
-
                 Phone phone = new Phone();
                 phone.setNumber(number);
                 phone.setUser(savedUser);
-                // Dentro do createUser:
-                phoneService.save(phone); // Usa o novo método save(Phone)
+                phoneService.save(phone);
+
+                // Adicione o telefone à lista do usuário
+                savedUser.getPhones().add(phone); // Lista já inicializada!
             }
         }
 
@@ -91,6 +91,14 @@ public class UserService {
 
         UserMapper.updateFromDTO(updateDTO, user);
         return userRepository.save(user);
+    }
+
+    @Transactional
+    public List<UserDTO> createUsers(List<CreateUserDTO> usersDTO) {
+        return usersDTO.stream()
+                .map(this::createUser)
+                .map(UserMapper::toDTO)
+                .toList();
     }
 
 }

@@ -46,8 +46,11 @@ public class PhoneService {
     }
 
     public Phone save(Phone phone) {
-        validatePhone(phone);
-        validateUserPhoneLimit(phone.getUser());
+        // Limpa o número antes de salvar
+        String cleanedNumber = phone.getNumber().replaceAll("[^0-9]", "");
+        phone.setNumber(cleanedNumber);
+
+        // Resto da lógica de validação e salvamento...
         return phoneRepository.save(phone);
     }
 
@@ -65,12 +68,23 @@ public class PhoneService {
         }
     }
 
-    public void validatePhoneNumber(String number) {
-        if (number == null || !number.matches("^\\d{10,11}$")) {
-            throw new IllegalArgumentException("Número inválido! Use DDD + número (10 ou 11 dígitos).");
+    public void validatePhoneNumber(String formattedNumber) {
+        if (formattedNumber == null) {
+            throw new IllegalArgumentException("Número não pode ser nulo!");
         }
 
-        int ddd = Integer.parseInt(number.substring(0, 2));
+        // Remove todos os caracteres não numéricos
+        String cleanedNumber = formattedNumber.replaceAll("[^0-9]", "");
+
+        // Valida quantidade de dígitos (10 ou 11)
+        if (cleanedNumber.length() < 10 || cleanedNumber.length() > 11) {
+            throw new IllegalArgumentException(
+                    "Número inválido! Use DDD + número (10 ou 11 dígitos). Ex: (11) 98765-4321"
+            );
+        }
+
+        // Extrai DDD e valida
+        int ddd = Integer.parseInt(cleanedNumber.substring(0, 2));
         if (ddd < 11 || ddd > 99) {
             throw new IllegalArgumentException("DDD inválido!");
         }
