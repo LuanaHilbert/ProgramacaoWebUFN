@@ -17,23 +17,28 @@ public class PhoneService {
     private final PhoneRepository phoneRepository;
     private final UserRepository userRepository;
 
+    // Injetando PhoneRepository e UserRepository
     public PhoneService(PhoneRepository phoneRepository, UserRepository userRepository) {
         this.phoneRepository = phoneRepository;
         this.userRepository = userRepository;
     }
 
+    // Método para buscar todos os telefones
     public List<Phone> findAll() {
         return phoneRepository.findAll();
     }
 
+    // Método para buscar telefone por ID
     public Optional<Phone> findById(Long id) {
         return phoneRepository.findById(id);
     }
 
+    // Método para deletar telefone por ID
     public void deleteById(Long id) {
         phoneRepository.deleteById(id);
     }
 
+    // Método para buscar telefones por id
     public boolean existsById(Long id) {
         return phoneRepository.existsById(id);
     }
@@ -41,19 +46,25 @@ public class PhoneService {
     public Phone save(Long userId, Phone phone) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado!"));
+        // Valida o limite de telefones do usuário
+        validateUserPhoneLimit(user);
         phone.setUser(user);
+        // Valida o telefone antes de salvar
+        validatePhone(phone);
         return save(phone);
     }
 
     public Phone save(Phone phone) {
+        // Valida o telefone antes de salvar
+        validatePhone(phone);
         // Limpa o número antes de salvar
         String cleanedNumber = phone.getNumber().replaceAll("[^0-9]", "");
         phone.setNumber(cleanedNumber);
 
-        // Resto da lógica de validação e salvamento...
         return phoneRepository.save(phone);
     }
 
+    // Método para validar telefone
     private void validatePhone(Phone phone) {
         validatePhoneNumber(phone.getNumber());
         if (phone.getUser() == null) {
@@ -61,6 +72,7 @@ public class PhoneService {
         }
     }
 
+    // Método para validar se o usuário já possui 3 telefones
     private void validateUserPhoneLimit(User user) {
         long count = phoneRepository.countByUser(user);
         if (count >= 3) {
@@ -68,6 +80,7 @@ public class PhoneService {
         }
     }
 
+    // Método para validar o número de telefone
     public void validatePhoneNumber(String formattedNumber) {
         if (formattedNumber == null) {
             throw new IllegalArgumentException("Número não pode ser nulo!");
