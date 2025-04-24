@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>Prova1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>prova1</name>
-    <description>prova1</description>
+    <name>Prova1</name>
+    <description>Prova1</description>
     <url/>
     <licenses>
         <license/>
@@ -48,10 +48,12 @@
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.38</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

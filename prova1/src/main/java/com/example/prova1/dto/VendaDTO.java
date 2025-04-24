@@ -1,10 +1,29 @@
 package com.example.prova1.dto;
 
-import jakarta.validation.constraints.*;
 import java.util.List;
 
-public record VendaDTO(
-        @NotNull Long clienteId,
-        @PositiveOrZero Double desconto,
-        @NotEmpty List<ItemVendaDTO> itens
-) {}
+public class VendaDTO {
+    private Long clienteId;
+    private Double desconto;
+    private List<ItemVendaDTO> itens;
+
+    // Construtor
+    public VendaDTO(Long clienteId, Double desconto, List<ItemVendaDTO> itens) {
+        this.clienteId = clienteId;
+        this.desconto = desconto;
+        this.itens = itens;
+    }
+
+    // Getters
+    public Long getClienteId() {
+        return clienteId;
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public List<ItemVendaDTO> getItens() {
+        return itens;
+    }
+}

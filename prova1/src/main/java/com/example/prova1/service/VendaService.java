@@ -4,7 +4,7 @@ import com.example.prova1.dto.*;
 import com.example.prova1.exception.EstoqueInsuficienteException;
 import com.example.prova1.model.*;
 import com.example.prova1.repository.VendaRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,18 +12,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class VendaService {
-    private final VendaRepository vendaRepository;
-    private final ClienteService clienteService;
-    private final ProdutoService produtoService;
+    @Autowired
+    private VendaRepository vendaRepository;
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     @Transactional
     public VendaResponseDTO create(VendaDTO dto) {
         // Verificar estoque antes de processar a venda
-        for (ItemVendaDTO item : dto.itens()) {
-            Produto produto = produtoService.findById(item.produtoId());
-            if (produto.getQuantidadeEstoque() < item.quantidade()) {
+        for (ItemVendaDTO item : dto.getItens()) {
+            Produto produto = produtoService.findById(item.getProdutoId());
+            if (produto.getQuantidadeEstoque() < item.getQuantidade()) {
                 throw new EstoqueInsuficienteException(
                         "Estoque insuficiente para o produto: " + produto.getNome());
             }
@@ -31,21 +35,21 @@ public class VendaService {
 
         // Processar venda
         Venda venda = new Venda();
-        venda.setCliente(clienteService.findById(dto.clienteId()));
-        venda.setDesconto(dto.desconto() != null ? dto.desconto() : 0.0);
+        venda.setCliente(clienteService.findById(dto.getClienteId()));
+        venda.setDesconto(dto.getDesconto() != null ? dto.getDesconto() : 0.0);
 
         // Calcular itens e total
-        List<ItemVenda> itens = dto.itens().stream()
+        List<ItemVenda> itens = dto.getItens().stream()
                 .map(itemDto -> {
-                    Produto produto = produtoService.findById(itemDto.produtoId());
+                    Produto produto = produtoService.findById(itemDto.getProdutoId());
                     ItemVenda item = new ItemVenda();
                     item.setProduto(produto);
-                    item.setQuantidade(itemDto.quantidade());
-                    item.setPrecoUnitario(itemDto.precoUnitario());
+                    item.setQuantidade(itemDto.getQuantidade());
+                    item.setPrecoUnitario(itemDto.getPrecoUnitario());
                     item.setVenda(venda);
 
                     // Atualizar estoque
-                    produtoService.updateEstoque(produto.getId(), itemDto.quantidade());
+                    produtoService.updateEstoque(produto.getId(), itemDto.getQuantidade());
 
                     return item;
                 })
@@ -75,8 +79,16 @@ public class VendaService {
     }
 
     public VendaResponseDTO findById(Long id) {
-        Venda venda = vendaRepository.findById(id).orElseThrow();
+        Venda venda = vendaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
         return toResponseDTO(venda);
+    }
+
+    public List<VendaResponseDTO> findVendasByClienteId(Long clienteId) {
+        List<Venda> vendas = vendaRepository.findByClienteId(clienteId);
+        return vendas.stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
     private VendaResponseDTO toResponseDTO(Venda venda) {

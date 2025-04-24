@@ -3,8 +3,7 @@ package com.example.prova1.controller;
 import com.example.prova1.dto.VendaDTO;
 import com.example.prova1.dto.VendaResponseDTO;
 import com.example.prova1.service.VendaService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +11,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vendas")
-@RequiredArgsConstructor
 public class VendaController {
-    private final VendaService service;
+    @Autowired
+    private VendaService service;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VendaResponseDTO create(@RequestBody @Valid VendaDTO dto) {
+    public VendaResponseDTO create(@RequestBody VendaDTO dto) {
         return service.create(dto);
     }
 
@@ -30,5 +29,10 @@ public class VendaController {
     @GetMapping("/{id}")
     public VendaResponseDTO findById(@PathVariable Long id) {
         return service.findById(id);
+    }
+
+    @GetMapping("/cliente/{clienteId}")
+    public List<VendaResponseDTO> getVendasByClienteId(@PathVariable Long clienteId) {
+        return service.findVendasByClienteId(clienteId);
     }
 }
