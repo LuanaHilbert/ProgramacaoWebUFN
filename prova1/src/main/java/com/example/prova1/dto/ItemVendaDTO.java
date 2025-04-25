@@ -3,13 +3,11 @@ package com.example.prova1.dto;
 public class ItemVendaDTO {
     private Long produtoId;
     private Integer quantidade;
-    private Double precoUnitario;
 
     // Construtor
-    public ItemVendaDTO(Long produtoId, Integer quantidade, Double precoUnitario) {
+    public ItemVendaDTO(Long produtoId, Integer quantidade) {
         this.produtoId = produtoId;
         this.quantidade = quantidade;
-        this.precoUnitario = precoUnitario;
     }
 
     // Getters
@@ -21,7 +19,4 @@ public class ItemVendaDTO {
         return quantidade;
     }
 
-    public Double getPrecoUnitario() {
-        return precoUnitario;
-    }
 }

@@ -45,7 +45,7 @@ public class VendaService {
                     ItemVenda item = new ItemVenda();
                     item.setProduto(produto);
                     item.setQuantidade(itemDto.getQuantidade());
-                    item.setPrecoUnitario(itemDto.getPrecoUnitario());
+                    item.setPrecoUnitario(produto.getPreco());
                     item.setVenda(venda);
 
                     // Atualizar estoque
@@ -92,6 +92,14 @@ public class VendaService {
     }
 
     private VendaResponseDTO toResponseDTO(Venda venda) {
+        // Cálculo do subtotal
+        double subtotal = venda.getItens().stream()
+                .mapToDouble(item -> item.getPrecoUnitario() * item.getQuantidade())
+                .sum();
+
+        // Cálculo do desconto em valor
+        double descontoEmValor = subtotal * (venda.getDesconto() / 100);
+
         List<ItemVendaResponseDTO> itensDTO = venda.getItens().stream()
                 .map(item -> new ItemVendaResponseDTO(
                         item.getProduto().getId(),
@@ -107,8 +115,9 @@ public class VendaService {
                 venda.getCliente().getId(),
                 venda.getCliente().getNome(),
                 venda.getDataVenda(),
-                venda.getDesconto(),
-                venda.getValorTotal(),
+                venda.getDesconto(),  // Percentual original (ex: 10)
+                descontoEmValor,      // Valor calculado (ex: 25)
+                subtotal - descontoEmValor, // Valor total
                 itensDTO
         );
     }

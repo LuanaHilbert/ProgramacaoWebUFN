@@ -8,17 +8,20 @@ public class VendaResponseDTO {
     private Long clienteId;
     private String clienteNome;
     private LocalDateTime dataVenda;
-    private Double desconto;
+    private Double descontoPercentual;  // Renomeado para ficar claro
+    private Double descontoEmValor;    // Novo campo
     private Double valorTotal;
     private List<ItemVendaResponseDTO> itens;
 
     public VendaResponseDTO(Long id, Long clienteId, String clienteNome, LocalDateTime dataVenda,
-                            Double desconto, Double valorTotal, List<ItemVendaResponseDTO> itens) {
+                            Double descontoPercentual, Double descontoEmValor, Double valorTotal,
+                            List<ItemVendaResponseDTO> itens) {
         this.id = id;
         this.clienteId = clienteId;
         this.clienteNome = clienteNome;
         this.dataVenda = dataVenda;
-        this.desconto = desconto;
+        this.descontoPercentual = descontoPercentual;
+        this.descontoEmValor = descontoEmValor;
         this.valorTotal = valorTotal;
         this.itens = itens;
     }
@@ -40,8 +43,12 @@ public class VendaResponseDTO {
         return dataVenda;
     }
 
-    public Double getDesconto() {
-        return desconto;
+    public Double getDescontoPercentual() {
+        return descontoPercentual;
+    }
+
+    public Double getDescontoEmValor() {
+        return descontoEmValor;
     }
 
     public Double getValorTotal() {
