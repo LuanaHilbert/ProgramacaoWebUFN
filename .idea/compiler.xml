@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for Prova1" enabled="true">
+      <profile name="Annotation profile for htmlcss" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -11,9 +11,11 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="prova1" />
+        <module name="htmlcss" />
         <module name="Pratica1_2" />
         <module name="Projeto1" />
         <module name="SpringCrud" />
+        <module name="Prova1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,8 +28,10 @@
       <module name="Pratica1" options="-parameters" />
       <module name="Pratica1_2" options="-parameters" />
       <module name="Projeto1" options="-parameters" />
+      <module name="Prova1" options="-parameters" />
       <module name="SpringCrud" options="-parameters" />
       <module name="demo" options="-parameters" />
+      <module name="htmlcss" options="-parameters" />
       <module name="prova1" options="-parameters" />
     </option>
   </component>

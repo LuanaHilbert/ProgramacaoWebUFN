@@ -1,0 +1,16 @@
+body {
+    background-color: beige;
+}
+
+h1 {
+    color: teal;
+    text-align: center;
+}
+
+p {
+    font-size: 18px;
+    border: 2px solid powderblue;
+    color: #333;
+    padding: 30px;
+    margin: 50px;
+}
