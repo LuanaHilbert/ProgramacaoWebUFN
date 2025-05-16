@@ -1,0 +1,32 @@
+.mycontainer {
+    width: 100%;
+    overflow: auto;
+}
+
+.mycontainer div {
+    width: 33%;
+    float: left;
+}
+
+.mycontainer div {
+    width: 10%;
+    display: inline-block;
+}
+
+.mycontainer {
+    display: flex;
+}
+
+.mycontainer > div {
+    width: 100%;
+}
+
+.mycontainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.mycontainer > div {
+    background-color: #f2f2f2;
+}

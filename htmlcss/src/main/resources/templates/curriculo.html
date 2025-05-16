@@ -3,65 +3,175 @@
     <meta charset="utf-8">
     <title>Currículo</title>
     <link rel="stylesheet" href="curriculo.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
+<script>
+    // Solução definitiva para scroll indesejado
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 10);
+    });
+</script>
 <body>
+<nav class="navbar">
+    <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#redes">Redes Sociais</a></li>
+        <li><a href="#contato">Contato</a></li>
+    </ul>
+</nav>
 
-<h1>Currículo</h1>
-<h2>Luana Hilbert, Analista de Dados</h2>
+<a id="topo" style="position: absolute; top: 0; visibility: hidden;"></a>
+<div class="container" id="sobre">
+    <h1>Currículo</h1>
+    <h2 class="subtitulo">Luana Hilbert, Analista de Dados</h2>
 
-<img class="foto-perfil" title="foto Luana" src="foto_curriculo.jpg" alt="foto">
+    <div class="profile-section">
+        <img class="foto-perfil" title="foto Luana" src="foto_curriculo.jpg" alt="foto">
 
-<p title="bio Luana">
-    Sou estudante do curso de <i>Tecnologias da Informação e Comunicação</i> na <b>UFSC</b> Araranguá,
-    transferida de Engenharia de Computação.
-    Já participei do projeto Meninas Digitais e fui voluntária no projeto PES - Projeto Educação Solidária. <br>
-    Sou analista de banco de dados no Grupo Voalle, onde atuo realizando manutenção de dados,
-    desenvolvendo relatórios e, principalmente, atuo na sanitização e ETL para migração de dados. <br>
-    Possuo duas certificações Microsoft: AZ-900 e DP-900.
-    A longo prazo gostaria de trabalhar com banco de dados em cloud. <br>
-    Sou fluente em inglês e estou estudando francês. <br>
-    Estou aberta a novos desafios e sempre buscando evoluir.
-</p>
+        <div class="bio">
+            <p title="bio Luana">
+                Sou estudante do curso de <i>Tecnologias da Informação e Comunicação</i> na <b>UFSC</b> Araranguá,
+                transferida de Engenharia de Computação.
+                Já participei do projeto Meninas Digitais e fui voluntária no projeto PES - Projeto Educação Solidária. <br>
+                Sou analista de banco de dados no Grupo Voalle, onde atuo realizando manutenção de dados,
+                desenvolvendo relatórios e, principalmente, atuo na sanitização e ETL para migração de dados. <br>
+                <span class="destaque">Possuo duas certificações Microsoft: AZ-900 e DP-900.</span>
+                A longo prazo gostaria de trabalhar com banco de dados em cloud. <br>
+                Sou fluente em inglês e estou estudando francês. <br>
+                Estou aberta a novos desafios e sempre buscando evoluir.
+            </p>
+        </div>
+    </div>
 
-<table class="tabela-habilidades">
-    <thead>
-    <tr>
-        <th style="background-color: #3c6e47;" colspan="3">Habilidades Técnicas</th>
-    </tr>
-    <tr>
-        <th>Habilidade</th>
-        <th>Nível</th>
-        <th>Experiência (anos)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Análise de Dados</td>
-        <td>Intermediário</td>
-        <td>3</td>
-    </tr>
-    <tr>
-        <td>Microsoft Azure</td>
-        <td>Iniciante</td>
-        <td>0</td>
-    </tr>
-    </tbody>
-</table>
+    <div class="skills-section" id="habilidades">
+        <h2 class="subtitulo">Habilidades Técnicas</h2>
+        <table class="tabela-habilidades">
+            <thead>
+            <tr>
+                <th style="background-color: #3c6e47;" colspan="3">Minhas Competências</th>
+            </tr>
+            <tr>
+                <th>Habilidade</th>
+                <th>Nível</th>
+                <th>Experiência (anos)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Análise de Dados</td>
+                <td>Intermediário</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Microsoft Azure</td>
+                <td>Iniciante</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>Migração de Dados</td>
+                <td>Intermediário</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>Iniciante</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>PostgreSQL</td>
+                <td>Avançado</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Linguagem C</td>
+                <td>Iniciante</td>
+                <td>2</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-<p>Redes Sociais: </p>
-<p>
-    <a target="_blank" href="https://www.linkedin.com/in/luanahilbert">
-        <img src="linkedin.png" alt="linkedin" width="30">
-    </a>
-    <a target="_blank" href="mailto:aluno@exemplo.com">
-        <img src="gmail.png" alt="gmail" width="30">
-    </a>
-    <a target="_blank" href="https://www.instagram.com/luanahilbert">
-        <img src="instagram.png" alt="instagram" width="30">
-    </a>
-</p>
+    <div class="social-section" id="redes">
+        <h2 class="subtitulo">Redes Sociais</h2>
+        <div class="social-icons">
+            <a target="_blank" href="https://www.linkedin.com/in/luanahilbert">
+                <img src="linkedin.png" alt="linkedin" width="30">
+            </a>
+            <a target="_blank" href="mailto:aluno@exemplo.com">
+                <img src="gmail.png" alt="gmail" width="30">
+            </a>
+            <a target="_blank" href="https://www.instagram.com/luanahilbert">
+                <img src="instagram.png" alt="instagram" width="30">
+            </a>
+        </div>
+    </div>
 
-<button onclick="document.location='https://www.google.com'">Google</button>
+    <button onclick="document.location='https://www.google.com'">Google</button>
 
+    <div class="titulo-contato" id="contato">
+        <h2 class="subtitulo">Entre em contato comigo!</h2>
+    </div>
+
+    <div class="form-contato">
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gênero:</label>
+                <div class="radio-group">
+                    <input type="radio" id="feminino" name="genero" value="feminino">
+                    <label for="feminino">Feminino</label>
+
+                    <input type="radio" id="masculino" name="genero" value="masculino">
+                    <label for="masculino">Masculino</label>
+
+                    <input type="radio" id="outro" name="genero" value="outro">
+                    <label for="outro">Outro</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Interesses:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="banco-dados" name="interesses" value="banco-dados">
+                    <label for="banco-dados">Banco de Dados</label>
+
+                    <input type="checkbox" id="analise-dados" name="interesses" value="analise-dados">
+                    <label for="analise-dados">Análise de Dados</label>
+
+                    <input type="checkbox" id="cloud" name="interesses" value="cloud">
+                    <label for="cloud">Cloud Computing</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="comentario">Comentário:</label>
+                <textarea id="comentario" name="comentario" placeholder="Digite sua mensagem aqui..." rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+        </form>
+    </div>
+
+    <div class="voltar-topo">
+        <a href="#topo">Voltar ao topo</a>
+    </div>
+
+</div>
 </body>
 </html>
