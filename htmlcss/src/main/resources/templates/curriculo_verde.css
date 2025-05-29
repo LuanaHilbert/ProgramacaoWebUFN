@@ -8,56 +8,12 @@
     --preto: #111;
 }
 
-
-
-
-
-
-/* Temas */
-.tema-folha {
-    --verde-escuro: #1a3c17;
-    --verde-medio: #2b5937;
-    --verde-claro: #3c6e47;
-    --verde-agua: #a8d8b0;
-    --texto: #ffffff;
-    --fundo-secundario: rgba(0, 0, 0, 0.2);
+/* Reset e estilos base */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
-.tema-sol {
-    --verde-escuro: #f5f5dc;
-    --verde-medio: #ffd700;
-    --verde-claro: #daa520;
-    --verde-agua: #8b4513;
-    --texto: #333333;
-    --fundo-secundario: rgba(255, 255, 255, 0.71);
-}
-
-.tema-lua {
-    --verde-escuro: #121212;
-    --verde-medio: #333333;
-    --verde-claro: #4a4a4a;
-    --verde-agua: #e0e0e0;
-    --texto: #ffffff;
-    --fundo-secundario: rgba(255, 255, 255, 0.1);
-}
-
-/* Ajuste o body para usar as novas variáveis */
-body {
-    background-color: var(--verde-escuro);
-    color: var(--texto);
-    /* resto permanece igual */
-}
-
-/* Ajuste o container */
-.container {
-    background-color: var(--fundo-secundario);
-    /* resto permanece igual */
-}
-
-
-
-
-/* Dropdown de temas */
 .dropdown {
     position: relative;
 }
@@ -94,27 +50,6 @@ body {
     margin-right: 8px;
     width: 20px;
     text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Reset e estilos base */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
 }
 
 body {

@@ -1,0 +1,478 @@
+/* Variáveis de cor para facilitar ajustes (TEMA CLARO) */
+:root {
+    --verde-escuro: #f0f8f0; /* Very light green/off-white for background */
+    --verde-medio: #e0f2e0;  /* Slightly darker light green for navbar/form */
+    --verde-claro: #c8e6c9;  /* Light green for accents/buttons */
+    --verde-agua: #66bb6a;   /* A medium green for highlights/borders */
+    --branco: #333333;       /* Dark text color for contrast */
+    --preto: #f8f8f8;        /* Light background for elements that were black */
+    --texto: #333333;        /* General text color for the light theme */
+}
+
+/* Reset e estilos base */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* Dropdown specific styles (adjusted for light theme) */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--verde-medio); /* Light green background */
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1); /* Lighter shadow */
+    z-index: 1001; /* Ensure it's above other content */
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid var(--verde-claro); /* Subtle border */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button { /* Changed from 'a' to 'button' for theme buttons */
+    color: var(--texto); /* Dark text */
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 3px;
+    background: none; /* No background by default */
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem; /* Match original link size */
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space for image/icon */
+}
+
+.dropdown-content button:hover {
+    background-color: var(--verde-claro); /* Lighter green on hover */
+    color: var(--verde-escuro); /* Darker text on hover */
+}
+
+.dropdown-content img { /* Styles for images inside dropdown buttons */
+    margin-right: 8px; /* Space between image and text */
+    width: 20px;
+    vertical-align: middle; /* Align image with text */
+}
+
+body {
+    background-color: var(--verde-escuro); /* Light background */
+    color: var(--texto); /* Dark text */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Barra de navegação */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--verde-medio); /* Light background */
+    padding: 15px 20px; /* Added horizontal padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    z-index: 1000;
+    border-bottom: 2px solid var(--verde-claro); /* Lighter border */
+    display: flex; /* Enable flexbox for horizontal alignment */
+    justify-content: space-between; /* Distributes items to ends, with space in between */
+    align-items: center; /* Vertically centers items */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--texto); /* Dark text for contrast */
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    background-color: var(--verde-claro); /* Accent green on hover */
+    color: var(--branco); /* Keep text dark on hover */
+    transform: translateY(-2px);
+}
+
+/* Container principal */
+.container {
+    margin-top: 80px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background-color: var(--preto); /* This will be a light grey/white in the new theme */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+}
+
+/* Cabeçalhos */
+h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--texto); /* Dark text */
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Lighter text shadow */
+}
+
+.subtitulo {
+    text-align: center;
+    font-weight: 600;
+    margin: 60px 0 25px 0;
+    color: var(--verde-agua); /* Medium green accent */
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.subtitulo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: var(--verde-claro); /* Light green for underline */
+    border-radius: 3px;
+}
+
+/* Seção de perfil */
+.profile-section {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    background-color: var(--verde-medio); /* Light background for section */
+    padding: 25px;
+    border-radius: 8px;
+    border-left: 4px solid var(--verde-agua); /* Medium green border */
+}
+
+.foto-perfil {
+    width: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+    transition: transform 0.3s;
+}
+
+.foto-perfil:hover {
+    transform: scale(1.02);
+}
+
+.bio p {
+    text-align: justify;
+    font-size: 1.05rem;
+    margin: 0;
+    padding: 0;
+    color: var(--texto); /* Dark text */
+}
+
+.destaque {
+    background-color: var(--verde-claro); /* Light green highlight */
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--texto); /* Dark text on highlight */
+}
+
+/* Tabela de habilidades */
+.skills-section {
+    margin: 70px 0;
+}
+
+.tabela-habilidades {
+    border-collapse: collapse;
+    margin: 25px auto;
+    width: 100%;
+    max-width: 650px;
+    font-size: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+.tabela-habilidades th,
+.tabela-habilidades td {
+    border: 1px solid var(--verde-claro); /* Light green border */
+    padding: 12px 15px;
+    text-align: center;
+    color: var(--texto); /* Dark text */
+}
+
+.tabela-habilidades th {
+    background-color: var(--verde-agua); /* Medium green header */
+    color: var(--branco); /* White text on header */
+    font-weight: 600;
+}
+
+.tabela-habilidades tr:nth-child(even) {
+    background-color: var(--verde-medio); /* Alternate row background */
+}
+
+.tabela-habilidades tr:hover {
+    background-color: var(--verde-claro); /* Light green on hover */
+    color: var(--texto); /* Dark text on hover */
+}
+
+/* Seção de redes sociais */
+.social-section {
+    text-align: center;
+    margin: 70px auto 40px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Botões */
+button {
+    display: block;
+    margin: 40px auto;
+    padding: 12px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--verde-agua); /* Medium green button */
+    color: var(--branco); /* White text */
+    border: none;
+    border-radius: 30px;
+    transition: all 0.3s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+}
+
+button:hover {
+    background-color: var(--verde-claro); /* Light green on hover */
+    color: var(--texto); /* Dark text on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+}
+
+/* Formulário de contato */
+.titulo-contato {
+    margin: 60px 0 30px;
+}
+
+.form-contato {
+    background-color: var(--verde-medio); /* Light background for form */
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px auto 40px;
+    box-sizing: border-box;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+    border: 1px solid var(--verde-claro); /* Light green border */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--verde-agua); /* Medium green label color */
+    font-size: 1.05rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--verde-claro); /* Light green border */
+    border-radius: 6px;
+    background-color: var(--branco); /* White background for inputs */
+    color: var(--texto); /* Dark text */
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    gap: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.radio-group label, .checkbox-group label {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--texto); /* Dark text for radio/checkbox labels */
+}
+
+.btn-enviar {
+    background-color: var(--verde-agua); /* Medium green send button */
+    color: var(--branco); /* White text */
+    font-weight: 600;
+    padding: 14px 30px;
+    margin-top: 20px;
+    transition: all 0.3s;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-enviar:hover {
+    background-color: var(--verde-claro); /* Light green on hover */
+    color: var(--texto); /* Dark text on hover */
+    transform: translateY(-3px);
+}
+
+/* Link "Voltar ao topo" */
+.voltar-topo {
+    text-align: center;
+    margin: 50px 0 30px;
+}
+
+.voltar-topo a {
+    color: var(--verde-agua); /* Medium green link */
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2px solid var(--verde-agua); /* Medium green border */
+    border-radius: 30px;
+    transition: all 0.3s;
+    display: inline-block;
+    font-size: 0.95rem;
+}
+
+.voltar-topo a:hover {
+    background-color: var(--verde-agua); /* Medium green background on hover */
+    color: var(--branco); /* White text on hover */
+    padding: 10px 30px;
+}
+
+/* Efeitos de foco */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--verde-agua); /* Medium green focus border */
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.3); /* Slightly transparent medium green shadow */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px 15px;
+        position: static;
+        height: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: static; /* Make dropdown content flow naturally on small screens */
+        width: 100%;
+        left: auto;
+        transform: none;
+        box-shadow: none;
+        margin-top: 10px;
+    }
+
+    .profile-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .foto-perfil {
+        width: 150px;
+    }
+
+    .container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subtitulo {
+        font-size: 1.5rem;
+    }
+
+    .form-contato {
+        padding: 20px;
+        width: calc(100% - 20px);
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .tabela-habilidades {
+        font-size: 0.9rem;
+    }
+
+    .tabela-habilidades th,
+    .tabela-habilidades td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    .bio p {
+        font-size: 0.95rem;
+    }
+}
