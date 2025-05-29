@@ -26,21 +26,25 @@
         <li><a href="#redes">Redes Sociais</a></li>
         <li><a href="#contato">Contato</a></li>
     </ul>
-    <div class="theme-switcher"> <li class="dropdown">
-        <a href="#"><i class="fas fa-palette"></i> Tema</a>
-        <div class="dropdown-content">
-            <button onclick="changeStyle('curriculo_verde.css')">
-                <img src="folha.png" width="20"> Floresta
+    <ul class="theme-switcher">
+        <li class="dropdown">
+            <button class="theme-button">
+                <i class="fas fa-palette"></i> Tema
+                <i class="fas fa-chevron-down"></i>
             </button>
-            <button onclick="changeStyle('curriculo_claro.css')">
-                <img src="sol.png" width="20"> Claro
-            </button>
-            <button onclick="changeStyle('estilo-dark.css')">
-                <img src="lua.png" width="20"> Escuro
-            </button>
-        </div>
-    </li>
-    </div>
+            <div class="dropdown-content">
+                <button onclick="changeStyle('curriculo_verde.css')" class="theme-option">
+                    <img src="folha.png" width="20"> Floresta
+                </button>
+                <button onclick="changeStyle('curriculo_claro.css')" class="theme-option">
+                    <img src="sol.png" width="20"> Claro
+                </button>
+                <button onclick="changeStyle('estilo-dark.css')" class="theme-option">
+                    <img src="lua.png" width="20"> Escuro
+                </button>
+            </div>
+        </li>
+    </ul>
     <script>
         function changeStyle(sheet) {
             document.getElementById('theme').href = sheet;

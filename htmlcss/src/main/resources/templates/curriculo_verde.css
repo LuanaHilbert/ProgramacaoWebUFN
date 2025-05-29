@@ -14,6 +14,14 @@ html {
     scroll-padding-top: 80px;
 }
 
+/* Estilos para o seletor de tema */
+.theme-switcher {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .dropdown {
     position: relative;
 }
@@ -61,33 +69,6 @@ body {
     line-height: 1.6;
 }
 
-/*body {*/
-/*    background-image: url('ring.jpg');*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*    background-attachment: fixed;*/
-/*    background-repeat: no-repeat;*/
-/*    color: white;*/
-/*    font-family: 'Segoe UI', Arial, sans-serif;*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    line-height: 1.6;*/
-/*    position: relative;*/
-/*}*/
-/* !*Camada escura para melhor legibilidade*!*/
-/*body::before {*/
-/*    content: '';*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    bottom: 0;*/
-/*    background-color: rgba(26, 60, 23, 0.95); !* Verde escuro com transparência *!*/
-/*    z-index: -1;*/
-/*}*/
-
-
-/* Barra de navegação */
 .navbar {
     position: fixed;
     top: 0;
