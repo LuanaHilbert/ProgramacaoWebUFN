@@ -1,0 +1,121 @@
+Sistema de Menu de Restaurante
+Este projeto é uma aplicação web completa para um sistema de menu de restaurante, dividida em uma área administrativa para gerenciamento de produtos e uma área de cliente para visualização do cardápio e realização de pedidos.
+
+Tecnologias Utilizadas
+Backend:
+Java 17
+Spring Boot (MVC, Spring Data JPA, RESTful API)
+Lombok
+Maven
+MySQL
+
+Frontend:
+React (com Vite)
+JavaScript (ES6+)
+HTML5
+CSS3 (puro, sem frameworks)
+Axios (para requisições HTTP)
+
+Funcionalidades
+Área Administrativa (Gerencial)
+Cadastro de Produtos: Adicionar novos itens ao cardápio (Nome, Descrição, Categoria, Preço, Imagem URL, Status).
+Edição de Produtos: Atualizar informações de produtos existentes.
+Exclusão de Produtos: Remover produtos do cardápio.
+Listagem de Produtos: Visualizar todos os produtos cadastrados.
+Ativar/Desativar Produtos: Controlar a visibilidade dos produtos para os clientes.
+
+Área do Cliente
+Visualização do Cardápio: Navegar apenas pelos produtos ativos no menu.
+Adicionar ao Carrinho: Selecionar produtos e adicioná-los a um carrinho de compras.
+Finalização da Compra: Confirmar o pedido, que é salvo no banco de dados.
+
+Estrutura do Projeto
+O projeto é dividido em dois diretórios principais: menu-api (backend) e restaurante-menu-frontend (frontend).
+
+.
+├── menu-api/                       # Projeto Backend (Spring Boot)
+│   ├── src/main/java/com/restaurante/menuapi/
+│   │   ├── config/                 # Configurações 
+│   │   ├── controller/             # Endpoints REST (ProductController, OrderController)
+│   │   ├── dto/                    # Data Transfer Objects
+│   │   ├── entity/                 # Entidades JPA (Product, Order, OrderItem)
+│   │   ├── repository/             # Interfaces de Repositório (Spring Data JPA)
+│   │   ├── service/                # Lógica de Negócio
+│   │   └── MenuApiApplication.java # Classe principal
+│   ├── src/main/resources/
+│   │   └── application.properties  # Configurações do banco de dados
+│   └── pom.xml                     # Dependências Maven
+│
+└── restaurante-menu-frontend/      # Projeto Frontend (React)
+    ├── public/
+    ├── src/
+    │   ├── assets/                 # Imagens, ícones
+    │   ├── components/             # Componentes reutilizáveis (ProductForm, ProductCard, Cart)
+    │   ├── contexts/               # Context API (CartContext)
+    │   ├── pages/                  # Páginas da aplicação (AdminDashboard, ClientMenu)
+    │   ├── services/               # Módulo de chamadas à API (api.js)
+    │   ├── App.jsx                 # Componente principal
+    │   ├── App.css                 # Estilos globais e de layout
+    │   ├── index.css               # Estilos CSS base
+    │   └── main.jsx                # Ponto de entrada
+    └── package.json                # Dependências Node.js
+
+Como Rodar o Projeto
+Siga os passos abaixo para configurar e executar a aplicação.
+
+1. Pré-requisitos
+Java Development Kit (JDK) 17 ou superior
+Maven
+MySQL Server
+Node.js e npm
+Postman (Opcional, para testar a API)
+IntelliJ IDEA (IDE recomendada)
+
+2. Configuração do Banco de Dados MySQL
+Atualize as credenciais no backend:
+Navegue até menu-api/src/main/resources/application.properties e atualize as seguintes linhas com suas informações do MySQL:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_banco?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+
+O Spring Boot, com a propriedade spring.jpa.hibernate.ddl-auto=update, criará as tabelas products, orders e order_items automaticamente quando o backend for iniciado pela primeira vez.
+
+3. Configuração e Execução do Backend (Spring Boot)
+Abra o projeto no IntelliJ IDEA:
+No IntelliJ, selecione "Open" e navegue até o diretório menu-api.
+O IntelliJ deve reconhecer o projeto Maven e importar as dependências automaticamente.
+
+Verifique as dependências Maven:
+Certifique-se de que o pom.xml está correto e que todas as dependências foram baixadas (Maven -> Reimport).
+
+Execute a aplicação:
+Localize a classe MenuApiApplication.java (src/main/java/com/restaurante/menuapi/).
+Clique com o botão direito na classe e selecione "Run 'MenuApiApplication.main()'".
+O backend será iniciado e estará acessível em http://localhost:8080.
+
+Importante: Verifique o console do IntelliJ para garantir que o backend iniciou sem erros e que a conexão com o banco de dados foi estabelecida.
+
+4. Configuração e Execução do Frontend (React)
+Navegue até o diretório do frontend:
+Abra um novo terminal e vá para a pasta restaurante-menu-frontend:
+cd restaurante-menu-frontend
+Instale as dependências Node.js:
+npm install
+Verifique a URL da API:
+Abra restaurante-menu-frontend/src/services/api.js e confirme se baseURL aponta para o seu backend:
+
+const api = axios.create({
+  baseURL: 'http://localhost:8080/api', // Deve corresponder à porta do seu backend
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+Certifique-se de que a porta 8080 (ou a porta que seu Spring Boot estiver usando) esteja correta.
+Execute o frontend:
+npm run dev
+O frontend será iniciado e geralmente estará acessível em http://localhost:5173 (Vite). O terminal indicará a URL exata.
+
+
+Desenvolvido por: Luana Hilbert
