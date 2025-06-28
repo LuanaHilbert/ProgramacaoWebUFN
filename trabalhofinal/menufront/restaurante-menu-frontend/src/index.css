@@ -1,0 +1,18 @@
+/* src/index.css */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif; /* Fonte padrão, você pode escolher outra */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5; /* Cor de fundo suave */
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Base styles for all elements to ensure consistent box model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
